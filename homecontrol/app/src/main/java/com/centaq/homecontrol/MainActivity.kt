@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.centaq.homecontrol.ui.theme.HomeControlTheme
 import com.centaq.homecontrol.ui.UIGenerator
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
             HomeControlTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    UIGenerator.GenerateGroups(UIGenerator.GetGroupDef())
+                    UIGenerator.GenerateGroups(this, UIGenerator.GetGroupDef())
                 }
             }
         }
@@ -30,6 +31,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     HomeControlTheme {
-        UIGenerator.GenerateGroups(UIGenerator.GetGroupDef())
+        UIGenerator.GenerateGroups(null, UIGenerator.GetGroupDef())
     }
 }

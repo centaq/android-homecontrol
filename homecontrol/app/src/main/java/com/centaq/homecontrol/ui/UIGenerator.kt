@@ -1,5 +1,6 @@
 package com.centaq.homecontrol.ui
 
+import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import com.centaq.homecontrol.R
 import com.centaq.homecontrol.SMSController
+import com.centaq.homecontrol.MainActivity
 
 public final class UIGenerator {
     companion object {
@@ -75,7 +77,7 @@ public final class UIGenerator {
         }
         @JvmStatic
         @Composable
-        fun GenerateGroups(groups: List<UIGroupDefinition>) {
+        fun GenerateGroups(activity: Activity?, groups: List<UIGroupDefinition>) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             )
@@ -100,7 +102,7 @@ public final class UIGenerator {
                                                 val c = LocalContext.current
                                                 IconButton(
                                                     onClick = {
-                                                        SMSController.sendSMS(c, action.cmd);
+                                                        SMSController.sendSMS(c,activity, action.cmd);
                                                         Toast.makeText(c, "sdfsdfs", Toast.LENGTH_LONG).show()
                                                     },
                                                     /*tint = Color.White,
