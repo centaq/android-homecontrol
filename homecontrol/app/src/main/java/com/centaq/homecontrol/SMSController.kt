@@ -11,7 +11,7 @@ public final class SMSController() {
             smsManager.sendTextMessage(
                 context.resources.getString(R.string.alarm_sms_number),
                 null,
-                cmd,
+                "*$cmd*",
                 null,
                 null)
 
