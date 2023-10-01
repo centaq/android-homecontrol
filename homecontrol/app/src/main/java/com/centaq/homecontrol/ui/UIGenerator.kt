@@ -3,11 +3,14 @@ package com.centaq.homecontrol.ui
 import android.app.Activity
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -17,11 +20,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.unit.dp
 import com.centaq.homecontrol.R
 import com.centaq.homecontrol.SMSController
 import com.centaq.homecontrol.MainActivity
@@ -79,12 +86,31 @@ public final class UIGenerator {
         @Composable
         fun GenerateGroups(activity: Activity?, groups: List<UIGroupDefinition>) {
             LazyColumn(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xFFD3E6F3),
+                                Color(0xFFDFEEF8)
+                            )
+                        )
+                    )
             )
             {
                 items(groups) { group ->
                     LazyRow(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 10.dp)
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color(0xFFD3E6F3),
+                                        Color(0xFFBBDAEE)
+                                    )
+                                )
+                            )
                     ) {
                         item {
                             Column() {
@@ -103,18 +129,19 @@ public final class UIGenerator {
                                                 IconButton(
                                                     onClick = {
                                                         SMSController.sendSMS(c,activity, action.cmd);
-                                                        Toast.makeText(c, "sdfsdfs", Toast.LENGTH_LONG).show()
+                                                        Toast.makeText(c, "Komenda wysłana", Toast.LENGTH_LONG).show()
                                                     },
-                                                    /*tint = Color.White,
+                                                    /*tint = Color.White,*/
                                                     modifier = Modifier
-                                                        .size(32.dp)*/
+                                                        .size(64.dp)
                                                 ) {
                                                     Icon(imageVector = ImageVector.vectorResource(action.icon),
-                                                        contentDescription = action.description)
+                                                        contentDescription = action.description,
+                                                        Modifier.size(32.dp))
                                                 }
                                                 Text(
                                                     action.description,
-                                                    fontSize = TextUnit(8.0F, TextUnitType.Sp)
+                                                    fontSize = TextUnit(12.0F, TextUnitType.Sp)
                                                 )
                                             }
                                         }
